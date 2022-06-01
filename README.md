@@ -3,6 +3,8 @@ vjudge.net dark theme black
 
 https://greasyfork.org/en/scripts/445861-vjudge-black-theme
 
+https://github.com/notwatermango/vjudge-dark-theme
+
 Screenshots
 <details>
   <summary>Problem Statement</summary>
