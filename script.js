@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         vjudge black theme
 // @namespace    https://github.com/notwatermango/vjudge-dark-theme
-// @version      0.1
-// @description  black color scheme, unthemed
+// @version      0.1.1
+// @description  black color scheme, (no color pallette yet)
 // @author       notwatermango
 // @match        https://vjudge.net/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=vjudge.net
@@ -12,6 +12,7 @@
 (function () {
   'use strict';
   var colors = {
+    background: '#1c1c1c',
     superblack: '#0A0908'
   };
   function overrideStyleAttribute(elm, prop, value) {
@@ -26,16 +27,15 @@
   var body_elm = document.querySelectorAll('body')[0];
   overrideStyleAttribute(body_elm, "color", "white");
   overrideStyleAttribute(body_elm, "background", "none");
-  overrideStyleAttribute(body_elm, "background-color", colors.superblack);
+  overrideStyleAttribute(body_elm, "background-color", colors.background);
   applyFuncWhenElmLoaded(
     'body',
     function (elm) {
       overrideStyleAttribute(elm, "color", "white");
       overrideStyleAttribute(elm, "background", "none");
-      overrideStyleAttribute(elm, "background-color", colors.superblack)
+      overrideStyleAttribute(elm, "background-color", colors.background)
     }
   );
-
 
   function rank_functions() {
     applyFuncWhenElmLoaded(
@@ -129,11 +129,20 @@
       function (elm) {
         overrideStyleAttribute(elm, "background-color", colors.superblack);
         overrideStyleAttribute(elm, "color", "white");
-      }
+      }, 1000
     );
     //#description-container>dd
 
 
+  }
+  function list_update() {
+    applyFuncWhenElmLoaded(
+      'li.list-group-item',
+      function (elm) {
+        overrideStyleAttribute(elm, "background-color", colors.superblack);
+        overrideStyleAttribute(elm, "color", "white");
+      }, 1000
+    );
   }
 
 
@@ -153,7 +162,9 @@
   const mutationObserver = new MutationObserver(function (mutations_list) {
     mutations_list.forEach(function (mutation) {
       mutation.addedNodes.forEach(function (added_node) {
-        rank_functions();
+        console.log("observing...:");
+          rank_functions();
+        list_update();
       });
     });
   });
@@ -163,8 +174,9 @@
     if (urlParam == '#rank') {
       setTimeout(rank_functions);
       mutationObserver.observe(document.querySelector('#contest-rank-table'), { subtree: false, childList: true });
-    } else {
-      mutationObserver.disconnect();
+    } else if (urlParam[1] == 'p') {
+      var li_elm = document.querySelector('#prob-descs');
+      mutationObserver.observe(li_elm, { subtree: false, childList: true});
     }
   };
 
@@ -195,6 +207,7 @@
 
 
 
+
   //mutationObserver.observe(document.querySelector('#group-contest-table tbody'), {subtree: false, childList: true});
   mutationObserver.observe(body_elm, { subtree: false, childList: true });
 
@@ -215,7 +228,7 @@
       return setTimeout(fixLinkColor, 100);
     }
     var elms = document.querySelectorAll("a");
-    console.log(elms.length);
+    list_update();
     for (let i = 0, len = elms.length; i < len; i++) {
       if (!elms[i].classList.contains('btn') && !parentHasClass(elms[i], 'name')) {
         overrideStyleAttribute(elms[i], "color", "#86c2f7");
