@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         vjudge black theme
+// @name         vjudge dark theme
 // @namespace    https://github.com/notwatermango/vjudge-dark-theme
 // @version      0.1.1
 // @description  black color scheme, (no color pallette yet)
@@ -12,8 +12,9 @@
 (function () {
   'use strict';
   var colors = {
-    background: '#1c1c1c',
-    superblack: '#0A0908'
+    background: '#0d1117',
+    superblack: '#0A0908',
+    navbar_background: '#161b22',
   };
   function overrideStyleAttribute(elm, prop, value) {
     elm.setAttribute("style", elm.getAttribute("style") + `; ${prop}: ${value} !important; `);
@@ -36,6 +37,15 @@
       overrideStyleAttribute(elm, "background-color", colors.background)
     }
   );
+  applyFuncWhenElmLoaded(
+    '.bg-inverse',
+    function (elm) {
+      overrideStyleAttribute(elm, "color", "white");
+      overrideStyleAttribute(elm, "background", "none");
+      overrideStyleAttribute(elm, "background-color", colors.navbar_background)
+    }
+  );
+
 
   function rank_functions() {
     applyFuncWhenElmLoaded(
@@ -163,7 +173,7 @@
     mutations_list.forEach(function (mutation) {
       mutation.addedNodes.forEach(function (added_node) {
         console.log("observing...:");
-          rank_functions();
+        rank_functions();
         list_update();
       });
     });
@@ -176,14 +186,14 @@
       mutationObserver.observe(document.querySelector('#contest-rank-table'), { subtree: false, childList: true });
     } else if (urlParam[1] == 'p') {
       var li_elm = document.querySelector('#prob-descs');
-      mutationObserver.observe(li_elm, { subtree: false, childList: true});
+      mutationObserver.observe(li_elm, { subtree: false, childList: true });
     }
   };
 
   handleHashChange();
   window.addEventListener('hashchange', handleHashChange);
 
-  function onClassChange(element, callback) {
+  function onClassChange(elm, callback) {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
@@ -194,7 +204,7 @@
         }
       });
     });
-    observer.observe(element, { attributes: true });
+    observer.observe(elm, { attributes: true });
     return observer.disconnect;
   }
 
@@ -204,20 +214,8 @@
       : rank_functions();
   });
 
-
-
-
-
-  //mutationObserver.observe(document.querySelector('#group-contest-table tbody'), {subtree: false, childList: true});
   mutationObserver.observe(body_elm, { subtree: false, childList: true });
 
-  // default #0275d8
-  function getStyle(elem, prop) {
-    if (elem.currentStyle) {
-      return elem.currentStyle[prop];
-    }
-    return document.defaultView.getComputedStyle(elem, null)[prop];
-  }
   function parentHasClass(elm, classname, depth = 0) {
     if (depth == 2) return false;
     if (elm.className.split(' ').indexOf(classname) >= 0) return true;
