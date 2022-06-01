@@ -2,7 +2,7 @@
 // @name         vjudge black theme
 // @namespace    https://github.com/notwatermango/vjudge-dark-theme
 // @version      0.1
-// @description  black color scheme, (no color pallette yet)
+// @description  black color scheme, unthemed
 // @author       notwatermango
 // @match        https://vjudge.net/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=vjudge.net
@@ -125,7 +125,7 @@
       }
     );
     applyFuncWhenElmLoaded(
-      'table.vjudge_sample thead tr th',
+      'table.vjudge_sample thead tr th, li.list-group-item',
       function (elm) {
         overrideStyleAttribute(elm, "background-color", colors.superblack);
         overrideStyleAttribute(elm, "color", "white");
@@ -138,7 +138,7 @@
 
 
   applyFuncWhenElmLoaded(
-    '.card-block, .list-group-item, .card',
+    '.card-block, .list-group-item, .card, .btn',
     function (elm) {
       overrideStyleAttribute(elm, "color", "white");
       overrideStyleAttribute(elm, "background", "none");
