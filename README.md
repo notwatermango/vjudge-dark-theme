@@ -2,10 +2,10 @@
 Dark Theme for [vjudge.net](https://vjudge.net/)
 
 - Installation
-https://greasyfork.org/en/scripts/445861-vjudge-black-theme
+[Greasy Fork](https://greasyfork.org/en/scripts/445861-vjudge-dark-theme)
 
 - Source Code
-https://github.com/notwatermango/vjudge-dark-theme
+[Github](https://github.com/notwatermango/vjudge-dark-theme)
 
 Screenshot(s)
 <details>
