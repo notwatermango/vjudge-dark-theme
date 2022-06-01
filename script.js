@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         vjudge dark theme
 // @namespace    https://github.com/notwatermango/vjudge-dark-theme
-// @version      0.1.1
-// @description  black color scheme, (no color pallette yet)
+// @version      0.1.2
+// @description  with some github dark color scheme
 // @author       notwatermango
 // @match        https://vjudge.net/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=vjudge.net
