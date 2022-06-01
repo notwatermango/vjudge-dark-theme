@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         vjudge dark theme
 // @namespace    https://github.com/notwatermango/vjudge-dark-theme
-// @version      0.1.2
+// @version      0.1.3
 // @description  with some github dark color scheme
 // @author       notwatermango
 // @match        https://vjudge.net/*
@@ -120,7 +120,7 @@
       }
     );
     applyFuncWhenElmLoaded(
-      ' #description-container dd',
+      ' #description-container dd, .preview, .form-control',
       function (elm) {
         overrideStyleAttribute(elm, "background-color", "#101935");
         overrideStyleAttribute(elm, "color", "#F2FDFF");
@@ -157,10 +157,16 @@
 
 
   applyFuncWhenElmLoaded(
-    '.card-block, .list-group-item, .card, .btn',
+    '.card-block, .list-group-item, .card, .btn, .my-sol',
     function (elm) {
       overrideStyleAttribute(elm, "color", "white");
       overrideStyleAttribute(elm, "background", "none");
+      overrideStyleAttribute(elm, "background-color", "#121212")
+    }
+  );
+  applyFuncWhenElmLoaded(
+    '#prob-my-sols td',
+    function (elm) {
       overrideStyleAttribute(elm, "background-color", "#121212")
     }
   );
